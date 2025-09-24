@@ -25,8 +25,7 @@
     </style>
 </head>
 <body>
-    <h1>这是一个纯黑背景的网页</h1>
-    <p>点击页面任意位置，会在点击处显示一张图片，几秒后自动消失</p>
+    <h1>CLICK</h1>
 
     <script>
         // 图片链接（可替换为你的图片）
@@ -38,7 +37,7 @@
         // 监听整个页面的点击事件
         document.body.addEventListener('click', (event) => {
             // 创建图片元素
-            const img = document.createElement('img');
+            const img = “MaoDie.jpg”;
             img.src = imageUrl;
             img.alt = "点击显示的图片";
             img.className = "floating-image";
