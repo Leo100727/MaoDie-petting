@@ -28,18 +28,18 @@
     <h1>CLICK</h1>
 
     <script>
-        // 图片链接（可替换为你的图片）
-        const imageUrl = "https://picsum.photos/200/200";
+        // 图片链接（使用同目录下的MaoDie.jpg）
+        const imageUrl = "MaoDie.jpg";
         
         // 图片显示时间（毫秒）
         const displayTime = 2000; // 2秒
         
         // 监听整个页面的点击事件
         document.body.addEventListener('click', (event) => {
-            // 创建图片元素
-            const img = “MaoDie.jpg”;
+            // 创建图片元素（修正处：使用document.createElement创建img元素）
+            const img = document.createElement('img');
             img.src = imageUrl;
-            img.alt = "点击显示的图片";
+            img.alt = "点击显示的蝴蝶图片";
             img.className = "floating-image";
             
             // 设置图片位置为鼠标点击位置
@@ -67,4 +67,4 @@
     </script>
 </body>
 </html>
-
+    
