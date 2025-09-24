@@ -13,52 +13,60 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        /* 图片样式 - 绝对定位以便跟随鼠标位置 */
         .floating-image {
             position: absolute;
-            max-width: 200px; /* 图片最大宽度 */
-            max-height: 200px; /* 图片最大高度 */
-            pointer-events: none; /* 避免图片干扰鼠标点击 */
-            opacity: 0; /* 初始透明 */
-            transition: opacity 0.3s ease; /* 淡入淡出效果 */
+            max-width: 200px;
+            max-height: 200px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .error-message {
+            color: red;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>CLICK</h1>
+    <div class="error-message" id="errorLog"></div>
 
     <script>
-        // 图片链接（使用同目录下的MaoDie.jpg）
-        const imageUrl= "MaoDie.jpg";
-        
-        // 图片显示时间（毫秒）
-        const displayTime = 2000; // 2秒
-        
-        // 监听整个页面的点击事件
+        const imageUrl = "MaoDie.jpg";
+        const displayTime = 2000;
+        const errorLog = document.getElementById('errorLog');
+
+        // 提前检查图片是否存在
+        const testImg = new Image();
+        testImg.src = imageUrl;
+        testImg.onload = () => {
+            errorLog.textContent = "图片可以正常加载";
+        };
+        testImg.onerror = () => {
+            errorLog.textContent = "图片加载失败，请检查路径: " + imageUrl;
+        };
+
         document.body.addEventListener('click', (event) => {
-            // 创建图片元素（修正处：使用document.createElement创建img元素）
             const img = document.createElement('img');
             img.src = imageUrl;
             img.alt = "点击显示的蝴蝶图片";
             img.className = "floating-image";
-            
-            // 设置图片位置为鼠标点击位置
-            // 减去图片一半的宽度和高度，使图片中心对准点击位置
+
+            // 监听图片加载错误
+            img.onerror = () => {
+                errorLog.textContent = "点击时图片加载失败: " + imageUrl;
+            };
+
             img.style.left = (event.clientX - 100) + "px";
             img.style.top = (event.clientY - 100) + "px";
-            
-            // 添加到页面
             document.body.appendChild(img);
-            
-            // 显示图片（淡入效果）
+
             setTimeout(() => {
                 img.style.opacity = "1";
             }, 10);
-            
-            // 一段时间后隐藏并移除图片
+
             setTimeout(() => {
                 img.style.opacity = "0";
-                // 等待淡出动画完成后再移除元素
                 setTimeout(() => {
                     document.body.removeChild(img);
                 }, 300);
