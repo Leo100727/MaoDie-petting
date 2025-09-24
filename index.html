@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>CLICK</title>
-<style>
+    <meta charset="UTF-8">
+    <title>纯黑网页</title>
+    <style>
         body {
             background-color: black;
             color: white;
@@ -11,7 +11,62 @@
             min-height: 100vh;
             padding: 20px;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
-</style>
+
+        /* 图片样式 - 绝对定位以便跟随鼠标位置 */
+        .floating-image {
+            position: absolute;
+            max-width: 200px; /* 图片最大宽度 */
+            max-height: 200px; /* 图片最大高度 */
+            pointer-events: none; /* 避免图片干扰鼠标点击 */
+            opacity: 0; /* 初始透明 */
+            transition: opacity 0.3s ease; /* 淡入淡出效果 */
+        }
+    </style>
 </head>
+<body>
+    <h1>这是一个纯黑背景的网页</h1>
+    <p>点击页面任意位置，会在点击处显示一张图片，几秒后自动消失</p>
+
+    <script>
+        // 图片链接（可替换为你的图片）
+        const imageUrl = "https://picsum.photos/200/200";
+        
+        // 图片显示时间（毫秒）
+        const displayTime = 2000; // 2秒
+        
+        // 监听整个页面的点击事件
+        document.body.addEventListener('click', (event) => {
+            // 创建图片元素
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = "点击显示的图片";
+            img.className = "floating-image";
+            
+            // 设置图片位置为鼠标点击位置
+            // 减去图片一半的宽度和高度，使图片中心对准点击位置
+            img.style.left = (event.clientX - 100) + "px";
+            img.style.top = (event.clientY - 100) + "px";
+            
+            // 添加到页面
+            document.body.appendChild(img);
+            
+            // 显示图片（淡入效果）
+            setTimeout(() => {
+                img.style.opacity = "1";
+            }, 10);
+            
+            // 一段时间后隐藏并移除图片
+            setTimeout(() => {
+                img.style.opacity = "0";
+                // 等待淡出动画完成后再移除元素
+                setTimeout(() => {
+                    document.body.removeChild(img);
+                }, 300);
+            }, displayTime);
+        });
+    </script>
+</body>
 </html>
+
