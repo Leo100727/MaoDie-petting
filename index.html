@@ -34,16 +34,16 @@
     <script>
         const imageUrl = "MaoDie.jpg";
         const displayTime = 2000;
-        const errorLog = document.getElementById('errorLog');
+        const errorLog = document.getElementById(' ');
 
         // 提前检查图片是否存在
         const testImg = new Image();
         testImg.src = imageUrl;
         testImg.onload = () => {
-            errorLog.textContent = "图片可以正常加载";
+            errorLog.textContent = " ";
         };
         testImg.onerror = () => {
-            errorLog.textContent = "图片加载失败，请检查路径: " + imageUrl;
+            errorLog.textContent = "  " + imageUrl;
         };
 
         document.body.addEventListener('click', (event) => {
@@ -54,7 +54,7 @@
 
             // 监听图片加载错误
             img.onerror = () => {
-                errorLog.textContent = "点击时图片加载失败: " + imageUrl;
+                errorLog.textContent = "  " + imageUrl;
             };
 
             img.style.left = (event.clientX - 100) + "px";
