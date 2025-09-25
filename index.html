@@ -33,7 +33,7 @@
 
     <script>
         const imageUrl = "MaoDie.jpg";
-        const displayTime = 2000000000000000000000;
+        const displayTime = 2000;
         const errorLog = document.getElementById(' ');
 
         // 提前检查图片是否存在
@@ -68,7 +68,7 @@
             setTimeout(() => {
                 img.style.opacity = "0";
                 setTimeout(() => {
-                    
+                    document.body.removeChild(img);
                 }, 300);
             }, displayTime);
         });
